@@ -9,17 +9,27 @@ class App extends Component {
     super();
     this.state = {
       products: data.products,
-      cartItems: [],
+      cartItems: JSON.parse(localStorage.getItem('cartItems'))
+        ? JSON.parse(localStorage.getItem('cartItems'))
+        : [],
       size: '',
       sort: '',
     };
   }
+
+  createOrder = (order) => {
+    alert('need to save order for' + order.name);
+  };
 
   removeFromCart = (product) => {
     const cartItems = this.state.cartItems.slice();
     this.setState({
       cartItems: cartItems.filter((e) => e._id !== product._id),
     });
+    localStorage.setItem(
+      'cartItems',
+      JSON.stringify(cartItems.filter((e) => e._id !== product._id))
+    );
   };
 
   addToCart = (product) => {
@@ -37,6 +47,7 @@ class App extends Component {
     this.setState({
       cartItems,
     });
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
 
   sortProducts = (event) => {
