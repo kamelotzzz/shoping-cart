@@ -112,6 +112,7 @@ class App extends Component {
               <Cart
                 cartItems={this.state.cartItems}
                 removeFromCart={this.removeFromCart}
+                createOrder={this.createOrder}
               ></Cart>
             </div>
           </div>
